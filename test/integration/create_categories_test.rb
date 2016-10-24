@@ -21,4 +21,16 @@ class CreateCategoriesTest < ActionDispatch::IntegrationTest
     assert_select "h2.panel-title"
     assert_select "div.panel-body"
   end
+  
+  test "should redirect create when not admin"
+    assert_no_difference 'Category.count' do 
+      post :create, category:{name: "Sports"}
+    end
+    assert_redirect_to categories_path
+  end
+  
+  
+  
+  
+  
 end
